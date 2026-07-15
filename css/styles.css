@@ -292,7 +292,7 @@ button {
 .hero__bg {
   position: absolute;
   inset: 0;
-  background: url('../img/hero/hero-main.jpg') center/cover no-repeat;
+  background: url('../img/hero/hero-main.jpeg') center/cover no-repeat;
   background-attachment: fixed;
 }
 

@@ -113,9 +113,6 @@ function renderGrid(grid) {
     <div class="portfolio__item" data-index="${index}">
       <img src="${item.src}" alt="${item.title}" loading="lazy"
            onerror="this.src='img/placeholder.svg'">
-      <div class="portfolio__item-overlay">
-        <span class="portfolio__item-category">${item.title}</span>
-      </div>
     </div>
   `).join('');
 

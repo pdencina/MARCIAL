@@ -125,7 +125,7 @@ button {
 }
 
 .btn--gold {
-  background: var(--color-accent-gold);
+  background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-copper));
   color: var(--color-bg-primary);
   border: 2px solid var(--color-accent-gold);
 }
@@ -133,8 +133,8 @@ button {
 .btn--gold:hover {
   background: transparent;
   color: var(--color-accent-gold);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(200, 169, 96, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(200, 169, 96, 0.35);
 }
 
 .btn--full {
@@ -174,7 +174,7 @@ button {
   display: block;
   width: 60px;
   height: 3px;
-  background: var(--color-accent-gold);
+  background: linear-gradient(90deg, var(--color-accent-gold), var(--color-accent-copper));
   margin: 16px auto 0;
   border-radius: 2px;
 }
@@ -294,12 +294,23 @@ button {
   inset: 0;
   background: url('../img/hero/hero-main.jpeg') center/cover no-repeat;
   background-attachment: fixed;
+  animation: heroZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
 }
 
 .hero__overlay {
   position: absolute;
   inset: 0;
-  background: var(--color-overlay);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.4) 40%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
 }
 
 .hero__content {
@@ -315,6 +326,8 @@ button {
   font-weight: 700;
   margin-bottom: 16px;
   letter-spacing: 2px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 1s ease 0.3s both;
 }
 
 .hero__subtitle {
@@ -323,11 +336,52 @@ button {
   color: var(--color-text-secondary);
   margin-bottom: 32px;
   letter-spacing: 0.5px;
+  animation: fadeInUp 1s ease 0.6s both;
+}
+
+.hero__content .btn {
+  animation: fadeInUp 1s ease 0.9s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero bottom gradient fade into next section */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(to bottom, transparent, var(--color-bg-secondary));
+  pointer-events: none;
 }
 
 /* ===== SERVICES ===== */
 .services {
   background: var(--color-bg-secondary);
+  position: relative;
+}
+
+.services::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-gold), transparent);
+  opacity: 0.3;
 }
 
 .services__grid {
@@ -339,16 +393,34 @@ button {
 .service-card {
   background: var(--color-bg-card);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 40px 30px;
   text-align: center;
   transition: all var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent-gold), var(--color-accent-copper));
+  opacity: 0;
+  transition: opacity var(--transition-medium);
 }
 
 .service-card:hover {
-  transform: translateY(-8px);
-  border-color: var(--color-accent-gold);
-  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-10px);
+  border-color: rgba(200, 169, 96, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(200, 169, 96, 0.08);
+}
+
+.service-card:hover::before {
+  opacity: 1;
 }
 
 .service-card__icon {
@@ -377,6 +449,22 @@ button {
 }
 
 /* ===== PORTFOLIO ===== */
+.portfolio {
+  position: relative;
+}
+
+.portfolio::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-gold), transparent);
+  opacity: 0.3;
+}
+
 .portfolio__filters {
   display: flex;
   justify-content: center;
@@ -393,15 +481,15 @@ button {
   text-transform: uppercase;
   color: var(--color-text-secondary);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  border-radius: 30px;
   transition: all var(--transition-fast);
 }
 
 .portfolio__filter:hover,
 .portfolio__filter.active {
-  color: var(--color-accent-gold);
+  color: var(--color-bg-primary);
   border-color: var(--color-accent-gold);
-  background: rgba(200, 169, 96, 0.1);
+  background: var(--color-accent-gold);
 }
 
 .portfolio__grid {
@@ -412,11 +500,16 @@ button {
 .portfolio__item {
   break-inside: avoid;
   margin-bottom: 16px;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  transition: opacity var(--transition-medium), transform var(--transition-medium);
+  transition: opacity var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.portfolio__item:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  transform: translateY(-4px);
 }
 
 .portfolio__item.hidden {
@@ -459,6 +552,19 @@ button {
 /* ===== ABOUT ===== */
 .about {
   background: var(--color-bg-secondary);
+  position: relative;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-gold), transparent);
+  opacity: 0.3;
 }
 
 .about__grid {
@@ -505,8 +611,26 @@ button {
   text-align: center;
   padding: 30px;
   background: var(--color-bg-card);
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.about__stat::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent-gold), var(--color-accent-copper));
+}
+
+.about__stat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .about__stat-number {
@@ -530,6 +654,22 @@ button {
 }
 
 /* ===== CONTACT ===== */
+.contact {
+  position: relative;
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-gold), transparent);
+  opacity: 0.3;
+}
+
 .contact__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -653,9 +793,10 @@ button {
 
 /* ===== FOOTER ===== */
 .footer {
-  background: #080808;
+  background: linear-gradient(180deg, #0a0a0a, #050505);
   padding: 60px 0 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(200, 169, 96, 0.15);
+  position: relative;
 }
 
 .footer__grid {
@@ -857,14 +998,22 @@ button {
 /* Scroll Animations */
 .fade-in {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Stagger animation for service cards */
+.service-card:nth-child(1) { transition-delay: 0ms; }
+.service-card:nth-child(2) { transition-delay: 100ms; }
+.service-card:nth-child(3) { transition-delay: 200ms; }
+.service-card:nth-child(4) { transition-delay: 300ms; }
+.service-card:nth-child(5) { transition-delay: 400ms; }
+.service-card:nth-child(6) { transition-delay: 500ms; }
 
 /* No-JS fallback: show everything */
 .no-js .fade-in {

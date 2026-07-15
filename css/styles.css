@@ -1038,6 +1038,7 @@ button {
 }
 
 @media (max-width: 768px) {
+  /* Navigation */
   .nav__toggle {
     display: flex;
   }
@@ -1046,7 +1047,7 @@ button {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 70%;
+    width: 75%;
     max-width: 300px;
     height: 100vh;
     background: var(--color-bg-secondary);
@@ -1062,41 +1063,243 @@ button {
     right: 0;
   }
 
+  .nav__link {
+    font-size: 1.1rem;
+  }
+
+  /* Hero mobile */
+  .hero__bg {
+    background-attachment: scroll;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .hero__subtitle {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .hero__content .btn {
+    padding: 12px 28px;
+    font-size: 0.85rem;
+  }
+
+  /* Services */
+  .services__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .service-card {
+    padding: 24px 16px;
+  }
+
+  .service-card__icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 14px;
+  }
+
+  .service-card__title {
+    font-size: 1rem;
+  }
+
+  .service-card__desc {
+    font-size: 0.8rem;
+  }
+
+  /* Portfolio */
   .portfolio__grid {
     columns: 2;
     column-gap: 10px;
   }
 
-  .contact__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .footer__grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .hero__bg {
-    background-attachment: scroll;
-  }
-}
-
-@media (max-width: 480px) {
-  .portfolio__grid {
-    columns: 1;
-  }
-
-  .services__grid {
-    grid-template-columns: 1fr;
+  .portfolio__item {
+    margin-bottom: 10px;
+    border-radius: 6px;
   }
 
   .portfolio__filters {
     gap: 8px;
+    margin-bottom: 24px;
   }
 
   .portfolio__filter {
     padding: 8px 16px;
     font-size: 0.75rem;
+  }
+
+  /* About */
+  .about__stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .about__stat {
+    padding: 20px 10px;
+  }
+
+  .about__stat-number {
+    font-size: 2rem;
+  }
+
+  .about__stat-label {
+    font-size: 0.7rem;
+  }
+
+  /* Contact */
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 12px 14px;
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+
+  /* Footer */
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .footer__links ul {
+    align-items: center;
+  }
+
+  /* Section spacing */
+  .section-title {
+    margin-bottom: 32px;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  /* WhatsApp button */
+  .whatsapp-btn {
+    bottom: 16px;
+    right: 16px;
+    width: 54px;
+    height: 54px;
+  }
+
+  .whatsapp-btn svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .whatsapp-btn__tooltip {
+    display: none;
+  }
+
+  /* Lightbox mobile */
+  .lightbox__img {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
+
+  .lightbox__close {
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+  }
+
+  .lightbox__prev {
+    left: 8px;
+    font-size: 1.5rem;
+  }
+
+  .lightbox__next {
+    right: 8px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio__grid {
+    columns: 2;
+    column-gap: 8px;
+  }
+
+  .portfolio__item {
+    margin-bottom: 8px;
+  }
+
+  .services__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .service-card {
+    padding: 20px 12px;
+  }
+
+  .service-card__icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .service-card__desc {
+    display: none;
+  }
+
+  .about__stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .about__stat {
+    padding: 16px 8px;
+  }
+
+  .about__stat-number {
+    font-size: 1.6rem;
+  }
+
+  .about__stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0;
+  }
+
+  .about__text {
+    font-size: 0.9rem;
+  }
+
+  .about__value {
+    font-size: 0.85rem;
+  }
+
+  .hero__content {
+    padding: 0 16px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .footer {
+    padding: 40px 0 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .portfolio__filters {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .portfolio__filter {
+    flex-shrink: 0;
+  }
+
+  .services__grid {
+    grid-template-columns: 1fr;
   }
 }
 

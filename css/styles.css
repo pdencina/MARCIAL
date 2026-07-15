@@ -1021,6 +1021,90 @@ button {
   align-items: start;
 }
 
+.contact__grid--centered {
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+/* WhatsApp CTA Card */
+.contact__whatsapp-card {
+  background: var(--color-bg-card);
+  border: 1px solid rgba(37, 211, 102, 0.2);
+  border-radius: 16px;
+  padding: 50px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact__whatsapp-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-whatsapp), #128C7E);
+}
+
+.contact__wa-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 24px;
+  color: var(--color-whatsapp);
+}
+
+.contact__wa-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.contact__wa-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--color-text-primary);
+}
+
+.contact__wa-text {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn--whatsapp {
+  background: var(--color-whatsapp);
+  color: #fff;
+  border: 2px solid var(--color-whatsapp);
+  padding: 16px 40px;
+  font-size: 1rem;
+  border-radius: 50px;
+}
+
+.btn--whatsapp:hover {
+  background: transparent;
+  color: var(--color-whatsapp);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.3);
+}
+
+.contact__wa-hours {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.5px;
+}
+
+.contact__details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .contact__form {
   display: flex;
   flex-direction: column;
@@ -1523,19 +1607,14 @@ button {
   }
 
   /* Contact */
-  .contact__grid {
+  .contact__grid,
+  .contact__grid--centered {
     grid-template-columns: 1fr;
     gap: 40px;
   }
 
-  .contact__form {
-    padding: 24px 20px;
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: 14px 14px;
-    font-size: 16px; /* Prevents iOS zoom on focus */
+  .contact__whatsapp-card {
+    padding: 36px 24px;
   }
 
   .contact__info-item {

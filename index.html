@@ -35,6 +35,7 @@
     "description": "Empresa de construcción de casas de alto estándar en Alto Hospicio, Chile",
     "url": "https://marcial-one.vercel.app",
     "telephone": "+56900000000",
+    "contactType": "WhatsApp",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Bolivia 9",
@@ -374,37 +375,24 @@
     <section id="contacto" class="contact section">
       <div class="container">
         <h2 class="section-title fade-in">Contáctanos<span class="section-title__accent"></span></h2>
-        <div class="contact__grid">
+        <div class="contact__grid contact__grid--centered">
 
-          <form class="contact__form fade-in" id="contact-form" action="https://formspree.io/f/placeholder" method="POST" novalidate>
-            <div class="form-group">
-              <label for="name">Nombre</label>
-              <input type="text" id="name" name="name" required placeholder="Ej: Juan Pérez" autocomplete="name">
-              <span class="form-error" aria-live="polite"></span>
+          <div class="contact__whatsapp-card fade-in">
+            <div class="contact__wa-icon">
+              <svg viewBox="0 0 32 32" fill="currentColor">
+                <path d="M16.004 0C7.165 0 .003 7.161.003 15.997c0 2.826.737 5.584 2.14 8.017L0 32l8.188-2.147A15.94 15.94 0 0016.004 32C24.838 32 32 24.837 32 15.997 32 7.161 24.838 0 16.004 0zm0 29.393a13.35 13.35 0 01-6.81-1.866l-.489-.29-5.065 1.329 1.35-4.938-.318-.505A13.3 13.3 0 012.61 15.997c0-7.393 6.005-13.39 13.394-13.39 7.393 0 13.39 5.997 13.39 13.39 0 7.396-5.997 13.396-13.39 13.396zm7.338-10.03c-.402-.201-2.379-1.174-2.748-1.308-.369-.134-.638-.201-.906.201-.268.402-1.04 1.308-1.275 1.576-.235.268-.47.302-.872.101-.402-.201-1.697-.625-3.232-1.994-1.195-1.065-2.001-2.38-2.236-2.782-.235-.402-.025-.619.177-.82.181-.18.402-.47.603-.704.201-.235.268-.402.402-.67.134-.268.067-.503-.033-.704-.101-.201-.906-2.184-1.241-2.99-.327-.785-.66-.679-.906-.691-.235-.012-.503-.014-.772-.014-.268 0-.704.101-1.073.503-.369.402-1.408 1.376-1.408 3.356 0 1.98 1.441 3.893 1.642 4.161.201.268 2.836 4.33 6.873 6.07.96.415 1.71.662 2.295.848.964.306 1.842.263 2.536.16.774-.116 2.379-.973 2.715-1.912.335-.939.335-1.744.235-1.912-.101-.168-.369-.268-.772-.47z"/>
+              </svg>
             </div>
-            <div class="form-group">
-              <label for="phone">Teléfono</label>
-              <input type="tel" id="phone" name="phone" required placeholder="+56 9 XXXX XXXX" autocomplete="tel">
-              <span class="form-error" aria-live="polite"></span>
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required placeholder="tu@correo.com" autocomplete="email">
-              <span class="form-error" aria-live="polite"></span>
-            </div>
-            <div class="form-group">
-              <label for="message">Mensaje</label>
-              <textarea id="message" name="message" required rows="4" placeholder="Cuéntanos qué tipo de proyecto tienes en mente..."></textarea>
-              <span class="form-error" aria-live="polite"></span>
-            </div>
-            <button type="submit" class="btn btn--gold btn--full">
-              <span class="btn__text">Enviar Mensaje</span>
-              <span class="btn__loading" aria-hidden="true"></span>
-            </button>
-            <div class="form-status" id="form-status" aria-live="polite"></div>
-          </form>
+            <h3 class="contact__wa-title">Escríbenos por WhatsApp</h3>
+            <p class="contact__wa-text">Respuesta rápida y directa. Cuéntanos sobre tu proyecto y te asesoramos sin compromiso.</p>
+            <a href="https://wa.me/56900000000?text=Hola%2C%20me%20interesa%20cotizar%20un%20proyecto%20con%20Constructora%20Jireh" 
+               class="btn btn--whatsapp" target="_blank" rel="noopener noreferrer">
+              Iniciar Conversación
+            </a>
+            <p class="contact__wa-hours">Respondemos en menos de 1 hora</p>
+          </div>
 
-          <div class="contact__info fade-in">
+          <div class="contact__details fade-in">
             <div class="contact__info-item">
               <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
@@ -420,18 +408,8 @@
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
               </svg>
               <div>
-                <h4>Teléfono</h4>
+                <h4>WhatsApp</h4>
                 <p>+56 9 0000 0000</p>
-              </div>
-            </div>
-            <div class="contact__info-item">
-              <svg class="contact__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-              <div>
-                <h4>Email</h4>
-                <p>contacto@constructorajireh.cl</p>
               </div>
             </div>
 
@@ -439,8 +417,8 @@
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.4!2d-70.1014!3d-20.2133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDEyJzQ4LjAiUyA3MMKwMDYnMDUuMCJX!5e0!3m2!1ses!2scl!4v1"
                 width="100%" 
-                height="250" 
-                style="border:0; border-radius: 8px;" 
+                height="220" 
+                style="border:0; border-radius: 12px;" 
                 allowfullscreen="" 
                 loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade"
@@ -476,8 +454,7 @@
         <div class="footer__contact">
           <h4>Contacto</h4>
           <p>Bolivia 9, Alto Hospicio</p>
-          <p>+56 9 0000 0000</p>
-          <p>contacto@constructorajireh.cl</p>
+          <p>WhatsApp: +56 9 0000 0000</p>
         </div>
       </div>
       <div class="footer__bottom">

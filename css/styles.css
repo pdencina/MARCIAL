@@ -48,6 +48,65 @@
   --z-whatsapp: 150;
 }
 
+/* ===== SPLASH SCREEN ===== */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--color-bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.splash.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash__content {
+  text-align: center;
+}
+
+.splash__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  opacity: 0;
+  filter: blur(10px);
+  animation: splashReveal 1.5s ease forwards;
+}
+
+.splash__line {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent-gold), var(--color-accent-copper));
+  margin: 20px auto 0;
+  animation: splashLine 1s ease 0.8s forwards;
+}
+
+@keyframes splashReveal {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes splashLine {
+  to {
+    width: 80px;
+  }
+}
+
 /* ===== RESET & BASE ===== */
 *,
 *::before,

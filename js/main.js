@@ -5,6 +5,18 @@
 // Remove no-js class
 document.documentElement.classList.remove('no-js');
 
+// Splash screen - hide after animation
+window.addEventListener('load', () => {
+  const splash = document.getElementById('splash');
+  if (splash) {
+    setTimeout(() => {
+      splash.classList.add('hidden');
+      // Remove from DOM after transition
+      setTimeout(() => splash.remove(), 800);
+    }, 2200);
+  }
+});
+
 // Import and initialize modules when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   try {

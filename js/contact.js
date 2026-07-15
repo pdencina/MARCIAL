@@ -128,6 +128,7 @@ function initContactForm() {
       const payload = {
         name: nameInput.value.trim(),
         phone: phoneInput.value.trim(),
+        email: emailInput.value.trim(),
         message: messageInput.value.trim()
       };
 

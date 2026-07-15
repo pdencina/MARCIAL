@@ -1,18 +1,97 @@
 /* ========================================
    CONTACT FORM MODULE
-   Validation and submission
+   Validation, formatting and submission
    ======================================== */
 
 function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
+  const nameInput = form.querySelector('#name');
+  const phoneInput = form.querySelector('#phone');
+  const emailInput = form.querySelector('#email');
+  const messageInput = form.querySelector('#message');
+
   const fields = {
-    name: { element: form.querySelector('#name'), rules: { required: true, minLength: 2 } },
-    phone: { element: form.querySelector('#phone'), rules: { required: true, pattern: /^[\+]?[\d\s\-]{8,15}$/ } },
-    email: { element: form.querySelector('#email'), rules: { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ } },
-    message: { element: form.querySelector('#message'), rules: { required: true, minLength: 10 } }
+    name: { element: nameInput, rules: { required: true, minLength: 2, maxLength: 60 } },
+    phone: { element: phoneInput, rules: { required: true, pattern: /^\+56\s9\s\d{4}\s\d{4}$/ } },
+    email: { element: emailInput, rules: { required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ } },
+    message: { element: messageInput, rules: { required: true, minLength: 10, maxLength: 500 } }
   };
+
+  // --- INPUT FORMATTING ---
+
+  // Name: only letters and spaces, capitalize first letter of each word
+  nameInput.addEventListener('input', () => {
+    let val = nameInput.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, '');
+    // Capitalize each word
+    val = val.replace(/\b\w/g, c => c.toUpperCase());
+    if (val.length > 60) val = val.slice(0, 60);
+    nameInput.value = val;
+  });
+
+  // Phone: auto-format to +56 9 XXXX XXXX
+  phoneInput.addEventListener('input', () => {
+    // Strip everything except digits
+    let digits = phoneInput.value.replace(/\D/g, '');
+
+    // If starts with 56, keep it; otherwise prepend 56
+    if (digits.startsWith('56')) {
+      digits = digits.slice(2);
+    }
+
+    // Limit to 9 digits (9 XXXX XXXX)
+    if (digits.length > 9) digits = digits.slice(0, 9);
+
+    // Format: +56 9 XXXX XXXX
+    let formatted = '+56';
+    if (digits.length > 0) formatted += ' ' + digits.slice(0, 1);
+    if (digits.length > 1) formatted += ' ' + digits.slice(1, 5);
+    if (digits.length > 5) formatted += ' ' + digits.slice(5, 9);
+
+    phoneInput.value = formatted;
+  });
+
+  // Phone: handle paste - clean and format
+  phoneInput.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const pasted = (e.clipboardData || window.clipboardData).getData('text');
+    let digits = pasted.replace(/\D/g, '');
+    if (digits.startsWith('56')) digits = digits.slice(2);
+    if (digits.length > 9) digits = digits.slice(0, 9);
+
+    let formatted = '+56';
+    if (digits.length > 0) formatted += ' ' + digits.slice(0, 1);
+    if (digits.length > 1) formatted += ' ' + digits.slice(1, 5);
+    if (digits.length > 5) formatted += ' ' + digits.slice(5, 9);
+
+    phoneInput.value = formatted;
+  });
+
+  // Phone: start with +56 on focus if empty
+  phoneInput.addEventListener('focus', () => {
+    if (!phoneInput.value) {
+      phoneInput.value = '+56 ';
+    }
+  });
+
+  // Email: lowercase, no spaces
+  emailInput.addEventListener('input', () => {
+    emailInput.value = emailInput.value.toLowerCase().replace(/\s/g, '');
+  });
+
+  // Message: limit characters and show counter
+  messageInput.addEventListener('input', () => {
+    if (messageInput.value.length > 500) {
+      messageInput.value = messageInput.value.slice(0, 500);
+    }
+    updateCharCounter(messageInput);
+  });
+
+  // Initialize character counter for message
+  createCharCounter(messageInput, 500);
+
+  // --- VALIDATION ---
 
   // Real-time validation on blur
   Object.values(fields).forEach(field => {
@@ -28,7 +107,7 @@ function initContactForm() {
     });
   });
 
-  // Form submission
+  // --- FORM SUBMISSION ---
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -63,6 +142,8 @@ function initContactForm() {
       if (response.ok) {
         showStatus('success', 'Mensaje enviado correctamente. Nos pondremos en contacto pronto.');
         form.reset();
+        // Reset phone field
+        phoneInput.value = '';
       } else {
         throw new Error('Server error');
       }
@@ -103,13 +184,20 @@ function validateField(field) {
     return false;
   }
 
+  // Max length check
+  if (rules.maxLength && value.length > rules.maxLength) {
+    group.classList.add('error');
+    errorEl.textContent = `Máximo ${rules.maxLength} caracteres`;
+    return false;
+  }
+
   // Pattern check
   if (rules.pattern && value && !rules.pattern.test(value)) {
     group.classList.add('error');
     if (element.type === 'email') {
-      errorEl.textContent = 'Formato de email inválido';
+      errorEl.textContent = 'Formato de email inválido (ej: tu@correo.com)';
     } else if (element.type === 'tel') {
-      errorEl.textContent = 'Formato de teléfono inválido';
+      errorEl.textContent = 'Completa el número: +56 9 XXXX XXXX';
     } else {
       errorEl.textContent = 'Formato inválido';
     }
@@ -117,6 +205,22 @@ function validateField(field) {
   }
 
   return true;
+}
+
+function createCharCounter(textarea, max) {
+  const counter = document.createElement('span');
+  counter.className = 'form-counter';
+  counter.textContent = `0/${max}`;
+  textarea.closest('.form-group').appendChild(counter);
+}
+
+function updateCharCounter(textarea) {
+  const counter = textarea.closest('.form-group').querySelector('.form-counter');
+  if (counter) {
+    const len = textarea.value.length;
+    counter.textContent = `${len}/500`;
+    counter.classList.toggle('near-limit', len > 450);
+  }
 }
 
 function showStatus(type, message) {

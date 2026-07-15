@@ -886,6 +886,17 @@ button {
   min-height: 18px;
 }
 
+.form-counter {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: right;
+  margin-top: 4px;
+}
+
+.form-counter.near-limit {
+  color: var(--color-accent-gold);
+}
+
 .form-status {
   padding: 14px;
   border-radius: 8px;

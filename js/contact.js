@@ -125,15 +125,19 @@ function initContactForm() {
     submitBtn.disabled = true;
 
     try {
-      const formData = new FormData(form);
+      const payload = {
+        name: nameInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        message: messageInput.value.trim()
+      };
 
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 5000);
+      const timeout = setTimeout(() => controller.abort(), 8000);
 
-      const response = await fetch(form.action, {
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
         signal: controller.signal
       });
 
@@ -142,7 +146,6 @@ function initContactForm() {
       if (response.ok) {
         showStatus('success', 'Mensaje enviado correctamente. Nos pondremos en contacto pronto.');
         form.reset();
-        // Reset phone field
         phoneInput.value = '';
       } else {
         throw new Error('Server error');

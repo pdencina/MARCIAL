@@ -1099,10 +1099,33 @@ button {
   letter-spacing: 0.5px;
 }
 
-.contact__details {
+.contact__right {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--color-bg-card);
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contact__form-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+
+.contact__info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .contact__form {

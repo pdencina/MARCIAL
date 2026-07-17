@@ -41,16 +41,36 @@ const portfolioData = [
 let currentFilter = 'all';
 let currentLightboxIndex = 0;
 let filteredImages = [...portfolioData];
+let visibleCount = 6; // Show 6 initially (2 rows of 3)
+const LOAD_MORE_COUNT = 6;
 
 function initPortfolio() {
   const grid = document.getElementById('portfolio-grid');
   const filters = document.querySelectorAll('.portfolio__filter');
   const lightbox = document.getElementById('lightbox');
+  const loadMoreBtn = document.getElementById('load-more-btn');
+  const loadMoreWrapper = document.getElementById('portfolio-load-more');
 
   if (!grid) return;
 
   // Render initial grid
   renderGrid(grid);
+  updateLoadMoreButton();
+
+  // Load more button
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      visibleCount += LOAD_MORE_COUNT;
+      renderGrid(grid);
+      updateLoadMoreButton();
+    });
+  }
+
+  function updateLoadMoreButton() {
+    if (loadMoreWrapper) {
+      loadMoreWrapper.style.display = visibleCount >= filteredImages.length ? 'none' : 'flex';
+    }
+  }
 
   // Filter buttons
   filters.forEach(btn => {
@@ -58,7 +78,9 @@ function initPortfolio() {
       filters.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentFilter = btn.dataset.filter;
+      visibleCount = 6; // Reset on filter change
       renderGrid(grid);
+      updateLoadMoreButton();
     });
   });
 
@@ -108,7 +130,9 @@ function renderGrid(grid) {
     ? [...portfolioData]
     : portfolioData.filter(item => item.category === currentFilter);
 
-  grid.innerHTML = filteredImages.map((item, index) => `
+  const visibleImages = filteredImages.slice(0, visibleCount);
+
+  grid.innerHTML = visibleImages.map((item, index) => `
     <div class="portfolio__item" data-index="${index}">
       <img src="${item.src}" alt="${item.title}" loading="lazy"
            onerror="this.src='img/placeholder.svg'">
